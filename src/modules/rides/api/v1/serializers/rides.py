@@ -25,3 +25,4 @@ class RideListSerializer(serializers.Serializer):
     dropoff_longitude = serializers.FloatField(read_only=True)
     pickup_time = serializers.DateTimeField(read_only=True)
     todays_ride_events = RideEventSerializer(many=True, read_only=True)
+    distance = serializers.FloatField(read_only=True, required=False, default=None)
