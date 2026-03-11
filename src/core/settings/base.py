@@ -21,7 +21,11 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     # Modules
+    "modules.accounts",
+    "modules.rides",
 ]
+
+AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
