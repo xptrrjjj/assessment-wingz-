@@ -2,6 +2,7 @@ import importlib
 import pkgutil
 
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 from core.api.router import router
 import modules
@@ -20,4 +21,8 @@ for _importer, module_name, _is_pkg in pkgutil.iter_modules(modules.__path__):
 urlpatterns = [
     path("v1/", include(router.urls)),
     *discovered_urlpatterns,
+    # Schema and docs
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
