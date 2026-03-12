@@ -17,6 +17,12 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_staff = False
     password = factory.PostGenerationMethodCall("set_password", "testpass123")
 
+    @classmethod
+    def _after_postgeneration(cls, instance, create, results=None):
+        """Save after set_password so the hashed password is persisted."""
+        if create:
+            instance.save()
+
 
 class AdminFactory(UserFactory):
     email = factory.Sequence(lambda n: f"admin{n}@example.com")
